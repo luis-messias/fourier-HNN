@@ -12,29 +12,27 @@ def get_trajectory(hamiltonian, t_span=[0,3], timescale=15, radius=None, y0=None
     y0 = y0 / np.sqrt((y0**2).sum()) * radius ## set the appropriate radius
     
     t, y, dy = SystemsIntegrator.integrateHamiltonian(hamiltonian, y0, t_eval)
-    q, p = y[0], y[1]
-    dq, dp = np.split(dy,2)
 
     # add noise
-    q += np.random.randn(*q.shape)*noise_std
-    p += np.random.randn(*p.shape)*noise_std
-    return q, p, dq, dp, t_eval
+    y += np.random.randn(*y.shape)*noise_std
+
+    return y, dy, t_eval
 
 def get_dataset(hamiltonian, seed=0, samples=50, test_split=0.5):
+    data = {'meta': locals()}
     np.random.seed(seed)
-    xs, dxs = [], []
+    ys, dys = [], []
     for s in range(samples):
-        x, y, dx, dy, t = get_trajectory(hamiltonian)
-        xs.append( np.stack( [x, y]).T )
-        dxs.append( np.stack( [dx, dy]).T )
-        input("")
+        y, dy, t = get_trajectory(hamiltonian)
+        ys.append(y.T)
+        dys.append(dy.T)
         
-    data['x'] = np.concatenate(xs)
-    data['dx'] = np.concatenate(dxs).squeeze()
+    data['ys'] = np.concatenate(ys)
+    data['dys'] = np.concatenate(dys).squeeze()
 
-    split_ix = int(len(data['x']) * test_split)
+    split_ix = int(len(data['ys']) * test_split)
     split_data = {}
-    for k in ['x', 'dx']:
+    for k in ['ys', 'dys']:
         split_data[k], split_data['test_' + k] = data[k][:split_ix], data[k][split_ix:]
     data = split_data
     return data
