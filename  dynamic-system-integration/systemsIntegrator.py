@@ -17,17 +17,17 @@ if __name__ == '__main__':
     h = classicHamiltonian.Hamiltonian(1, pendulum)
     
     startPoint = np.array((np.pi/2, 0))
-    t, y = integrateHamiltonian(h, startPoint, np.linspace(0, 10, 1000))
-    integrator.plotData(t, y, title=f"Pendulum starting at: {startPoint}")
+    t, y, dy = integrateHamiltonian(h, startPoint, np.linspace(0, 10, 1000))
+    integrator.plotData(t, y, dy, title=f"Pendulum starting at: {startPoint}")
     
     startPoint = np.array((0, 0))
-    t, y = integrateHamiltonian(h, startPoint, np.linspace(0, 10, 1000))
-    integrator.plotData(t, y, title=f"Pendulum starting at: {startPoint}")
+    t, y, dy = integrateHamiltonian(h, startPoint, np.linspace(0, 10, 1000))
+    integrator.plotData(t, y, dy, title=f"Pendulum starting at: {startPoint}")
     
     startPoint = np.array((np.pi, 0))
-    t, y = integrateHamiltonian(h, startPoint, np.linspace(0, 10, 1000))
-    integrator.plotData(t, y, title=f"Pendulum starting at: {startPoint}")
+    t, y, dy = integrateHamiltonian(h, startPoint, np.linspace(0, 10, 1000))
+    integrator.plotData(t, y, dy, title=f"Pendulum starting at: {startPoint}")
     
     startPoint = np.array((0.001, 0))
-    t, y = integrateHamiltonian(h, startPoint, np.linspace(0, 10, 1000))
-    integrator.plotData(t, y, title=f"Pendulum starting at: {startPoint}")
+    t, y, dy = integrateHamiltonian(h, startPoint, np.linspace(0, 10, 1000))
+    integrator.plotData(t, y, dy, title=f"Pendulum starting at: {startPoint}")
