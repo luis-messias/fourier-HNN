@@ -1,5 +1,5 @@
-import ClassicHamiltonian
-import Integrator
+import DynamicSystemIntegrator.ClassicHamiltonian as ClassicHamiltonian
+import DynamicSystemIntegrator.Integrator as Integrator
 
 import autograd.numpy as np
 
