@@ -1,6 +1,7 @@
 import generateDataSets
 
 import torch
+from torch import nn
 import numpy as np
 import os
 
@@ -21,16 +22,14 @@ class MLP(torch.nn.Module):
     h = self.nonlinearity( self.linear2(h) )
     return self.linear3(h)
 
-def L2_loss(u, v):
-  return (u-v).pow(2).mean()
-
 def train(seed=0, hidden_dim=200, learn_rate=1e-3, total_steps=2000, print_every=200, nonlinearity=torch.tanh, verbose=True):
     torch.manual_seed(seed)
     np.random.seed(seed)
 
     model = MLP(2, hidden_dim, 2, nonlinearity)
     optim = torch.optim.Adam(model.parameters(), learn_rate, weight_decay=1e-4)
-
+    lossL2 = nn.MSELoss()
+    
     trainDataSet, valDataSet, _ = generateDataSets.get_pendulum_dataset_with_cache()
     y_train = torch.tensor(trainDataSet["ys"], requires_grad=True, dtype=torch.float32)
     dy_train = torch.tensor(trainDataSet["dys"], requires_grad=True, dtype=torch.float32)
@@ -42,12 +41,12 @@ def train(seed=0, hidden_dim=200, learn_rate=1e-3, total_steps=2000, print_every
         
         # train step
         dy_hat_train = model.forward(y_train)
-        loss = L2_loss(dy_train, dy_hat_train)
+        loss = lossL2(dy_train, dy_hat_train)
         loss.backward() ; optim.step() ; optim.zero_grad()
         
         # run test data
         dy_hat_val_hat = model.forward(y_val)
-        test_loss = L2_loss(dy_val, dy_hat_val_hat)
+        test_loss = lossL2(dy_val, dy_hat_val_hat)
 
         # logging
         stats['train_loss'].append(loss.item())
@@ -59,6 +58,7 @@ def train(seed=0, hidden_dim=200, learn_rate=1e-3, total_steps=2000, print_every
     train_dist = (dy_train - dy_hat_train)**2
     dy_hat_val = model.forward(y_val)
     val_dist = (dy_val - dy_hat_val)**2
+
     print('Final train loss {:.4e} +/- {:.4e}\nFinal test loss {:.4e} +/- {:.4e}'
         .format(train_dist.mean().item(), train_dist.std().item()/np.sqrt(train_dist.shape[0]),
                 val_dist.mean().item(), val_dist.std().item()/np.sqrt(val_dist.shape[0])))
