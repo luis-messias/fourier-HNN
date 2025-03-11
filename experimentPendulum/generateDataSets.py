@@ -51,11 +51,11 @@ def get_pendulum_dataset():
     
     return get_datasets(h)
 
-def get_pendulum_dataset_with_cache():
+def get_pendulum_dataset_with_cache(forceNew=False):
     scriptPath = os.path.dirname(os.path.abspath(__file__))
     dataSetFolder = os.path.join(scriptPath, "Data")
     
-    dataSetIsAvailable = True
+    dataSetIsAvailable = not forceNew
     dataSets = []
     for label in ["train", "val", "test"]:
         dataSet = {"label": label, "system": "pendulum"}
