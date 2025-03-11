@@ -21,10 +21,10 @@ def plotData(t, y, dy=None, title=None):
     plt.show()
     
 if __name__ == '__main__':
-    def simpleEDO(t, x):
+    def simpleEDO(t, y):
         k = - 2
-        dx = k * x
-        return dx
+        dy = k * y
+        return dy
     
     startPoint = np.array([np.pi/2])
     t, y, dy = integrateSystem(simpleEDO, startPoint, np.linspace(0, 10, 1000))
