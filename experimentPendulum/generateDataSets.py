@@ -32,7 +32,6 @@ def get_datasets(hamiltonian, seed=0, samples=75, train_val_test_split=[1/3, 1/3
     data['ys'] = np.concatenate(ys)
     data['dys'] = np.concatenate(dys).squeeze()
 
-    
     data_set_size = len(data['ys'])
     val_i = int( data_set_size * train_val_test_split[0])
     test_i = val_i + int(data_set_size * train_val_test_split[1])
@@ -85,4 +84,3 @@ if __name__ == '__main__':
         print(dataSet["ys"])
         print(dataSet["dys"])
         print()
-    
