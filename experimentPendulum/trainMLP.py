@@ -17,8 +17,8 @@ class MLP(torch.nn.Module):
 
     self.nonlinearity = nonlinearity
 
-  def forward(self, x):
-    h = self.nonlinearity( self.linear1(x) )
+  def forward(self, y):
+    h = self.nonlinearity( self.linear1(y) )
     h = self.nonlinearity( self.linear2(h) )
     return self.linear3(h)
 
