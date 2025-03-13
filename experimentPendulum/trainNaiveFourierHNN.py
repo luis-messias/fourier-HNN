@@ -31,9 +31,12 @@ class NaiveFourierHNN(torch.nn.Module):
         self.M = self.permutation_tensor(input_dim) # Levi-Civita permutation tensor
 
     def forward(self, y):
-        sin = torch.sin(y[:,0])
-        cos = torch.cos(y[:,0])
-        z = torch.column_stack([sin,cos,y[:,0],y[:,1]])
+        z = torch.column_stack([torch.sin(y[:,0]),
+                                torch.cos(y[:,0]),
+                                y[:,0],
+                                torch.sin(y[:,1]),
+                                torch.cos(y[:,1]),
+                                y[:,1]])
 
         hamiltonian = self.differentiable_model(z)
         assert hamiltonian.dim() == 2 and hamiltonian.shape[1] == 1, "Output tensor should have shape [batch_size, 1]"
@@ -66,7 +69,7 @@ def train(seed=0, hidden_dim=200, learn_rate=1e-3, total_steps=2000, print_every
     torch.manual_seed(seed)
     np.random.seed(seed)
 
-    nn_model = MLP(4, hidden_dim, 1, nonlinearity)
+    nn_model = MLP(6, hidden_dim, 1, nonlinearity)
     model = NaiveFourierHNN(2, differentiable_model=nn_model)
     
     optim = torch.optim.Adam(model.parameters(), learn_rate, weight_decay=1e-4)
