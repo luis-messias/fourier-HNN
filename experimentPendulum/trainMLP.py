@@ -32,8 +32,8 @@ def train(seed=0, hidden_dim=200, learn_rate=1e-3, total_steps=2000, print_every
     
     trainDataSet, valDataSet, _ = generateDataSets.get_pendulum_dataset_with_cache()
     y_train = torch.tensor(trainDataSet["ys"], requires_grad=True, dtype=torch.float32)
-    dy_train = torch.tensor(trainDataSet["dys"], requires_grad=True, dtype=torch.float32)
-    y_val = torch.Tensor(valDataSet["ys"])
+    dy_train = torch.Tensor(trainDataSet["dys"])
+    y_val = torch.tensor(valDataSet["ys"], requires_grad=True, dtype=torch.float32)
     dy_val = torch.Tensor(valDataSet["dys"])
 
     stats = {'train_loss': [], 'test_loss': []}
