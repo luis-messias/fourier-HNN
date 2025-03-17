@@ -2,7 +2,7 @@ from DynamicSystemIntegrator import ClassicHamiltonian, SystemsIntegrator
 import autograd.numpy as np
 import os
 
-dataSetVariables = ['hamiltonian_coords_ys', 'hamiltonian_coords_dys']
+dataSetVariables = ['hamiltonian_coords_ys', 'hamiltonian_coords_dys', 'lagrangian_coords_ys', 'lagrangian_coords_dys']
 def get_trajectory(hamiltonian, t_span=[0,3], timescale=15, radius=None, y0=None, noise_std=0.1):
     t_eval = np.linspace(t_span[0], t_span[1], int(timescale*(t_span[1]-t_span[0])))
     
@@ -24,14 +24,32 @@ def get_datasets(hamiltonian, seed=0, samples=75, train_val_test_split=[1/3, 1/3
     np.random.seed(seed)
     data = {}
     hamiltonian_coords_ys, hamiltonian_coords_dys = [], []
+    lagrangian_coords_ys, lagrangian_coords_dys = [], []
     
     for s in range(samples):
         y, dy, t = get_trajectory(hamiltonian)
+        # p = m*l*l*dq_dt
+        # dp_dt = m*l*l*d2q_dt
+        
+        # m*l*l = 0.5
+        # dq_dt = p/m*l*l
+        # d2q_dt = dp_dt/m*l*l
+        q, p = np.split(y,2)
+        dq = p / 0.5
+        dq, dp = np.split(dy,2)
+        d2q = dp / 0.5
+        lagrangian_y = np.concatenate([q, dq], axis=0)
+        lagrangian_dy = np.concatenate([dq, d2q], axis=0)
+        
         hamiltonian_coords_ys.append(y.T)
         hamiltonian_coords_dys.append(dy.T)
-        
+        lagrangian_coords_ys.append(lagrangian_y.T)
+        lagrangian_coords_dys.append(lagrangian_dy.T)
+    
     data['hamiltonian_coords_ys'] = np.concatenate(hamiltonian_coords_ys)
     data['hamiltonian_coords_dys'] = np.concatenate(hamiltonian_coords_dys).squeeze()
+    data['lagrangian_coords_ys'] = np.concatenate(lagrangian_coords_ys)
+    data['lagrangian_coords_dys'] = np.concatenate(lagrangian_coords_dys).squeeze()
 
     data_set_size = len(data['hamiltonian_coords_ys'])
     val_i = int( data_set_size * train_val_test_split[0])
@@ -80,7 +98,9 @@ def get_pendulum_dataset_with_cache(forceNew=False):
 
 
 if __name__ == '__main__':
+    datasets = get_pendulum_dataset_with_cache(forceNew=False)
     for dataSet in get_pendulum_dataset_with_cache():
         print(f"""{dataSet["label"].upper()} dataset for {dataSet["system"]} simulation""")
         for variable in dataSetVariables:
-            print(dataSet[variable])
+            print(variable, dataSet[variable])
+        print()
