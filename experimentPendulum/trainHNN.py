@@ -69,11 +69,21 @@ def train(seed=0, hidden_dim=200, learn_rate=1e-3, total_steps=2000, print_every
     lossL2 = nn.MSELoss()
 
     trainDataSet, valDataSet, _ = generateDataSets.get_pendulum_dataset_with_cache()
-    y_train = torch.tensor(trainDataSet["hamiltonian_coords_ys"], requires_grad=True, dtype=torch.float32)
-    dy_train = torch.Tensor(trainDataSet["hamiltonian_coords_dys"])
-    y_val = torch.tensor(valDataSet["hamiltonian_coords_ys"], requires_grad=True, dtype=torch.float32)
-    dy_val = torch.Tensor(valDataSet["hamiltonian_coords_dys"])
-
+    
+    q = torch.tensor(trainDataSet["q"], dtype=torch.float32, requires_grad=True)
+    p = torch.tensor(trainDataSet["p"], dtype=torch.float32, requires_grad=True)
+    dq = torch.tensor(trainDataSet["dq"], dtype=torch.float32, requires_grad=True)
+    dp = torch.tensor(trainDataSet["dp"], dtype=torch.float32, requires_grad=True)
+    y_train = torch.cat((q, p), dim=1)
+    dy_train = torch.cat((dq, dp), dim=1)
+    
+    q = torch.tensor(valDataSet["q"], dtype=torch.float32, requires_grad=True)
+    p = torch.tensor(valDataSet["p"], dtype=torch.float32, requires_grad=True)
+    dq = torch.tensor(valDataSet["dq"], dtype=torch.float32, requires_grad=True)
+    dp = torch.tensor(valDataSet["dp"], dtype=torch.float32, requires_grad=True)
+    y_val  = torch.cat((q, p), dim=1)
+    dy_val = torch.cat((dq, dp), dim=1)
+    
     stats = {'train_loss': [], 'test_loss': []}
     for step in range(total_steps+1):
         
