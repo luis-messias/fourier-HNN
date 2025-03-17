@@ -69,10 +69,10 @@ def train(seed=0, hidden_dim=200, learn_rate=1e-3, total_steps=2000, print_every
     lossL2 = nn.MSELoss()
 
     trainDataSet, valDataSet, _ = generateDataSets.get_pendulum_dataset_with_cache()
-    y_train = torch.tensor(trainDataSet["ys"], requires_grad=True, dtype=torch.float32)
-    dy_train = torch.Tensor(trainDataSet["dys"])
-    y_val = torch.tensor(valDataSet["ys"], requires_grad=True, dtype=torch.float32)
-    dy_val = torch.Tensor(valDataSet["dys"])
+    y_train = torch.tensor(trainDataSet["hamiltonian_coords_ys"], requires_grad=True, dtype=torch.float32)
+    dy_train = torch.Tensor(trainDataSet["hamiltonian_coords_dys"])
+    y_val = torch.tensor(valDataSet["hamiltonian_coords_ys"], requires_grad=True, dtype=torch.float32)
+    dy_val = torch.Tensor(valDataSet["hamiltonian_coords_dys"])
 
     stats = {'train_loss': [], 'test_loss': []}
     for step in range(total_steps+1):
