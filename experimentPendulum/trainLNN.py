@@ -93,7 +93,7 @@ def train(seed=0, hidden_dim=200, learn_rate=1e-3, total_steps=2000, print_every
         stats['test_loss'].append(test_loss.item())
         if verbose and step % print_every == 0:
             end_time = time.time()
-            print("step {}, train_loss {:.4e}, test_loss {:.4e}, time: ".format(step, loss.item(), test_loss.item(), end_time - start_time))
+            print("step {}, train_loss {:.4e}, test_loss {:.4e}, time: {}".format(step, loss.item(), test_loss.item(), end_time - start_time))
 
     d2q_hat_train = model.time_derivative(y_train)
     train_dist = (d2q_train - d2q_hat_train)**2
