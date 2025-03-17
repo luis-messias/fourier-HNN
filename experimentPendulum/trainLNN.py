@@ -4,6 +4,7 @@ import torch
 from torch import nn
 import numpy as np
 import os
+import time
 
 class MLP(torch.nn.Module):
   def __init__(self, input_dim, hidden_dim, output_dim, nonlinearity=torch.tanh):
@@ -39,16 +40,13 @@ class LNN(torch.nn.Module):
         def l(q, q_t):
             y = torch.cat((q, q_t), dim=1)
             return self.forward(y).sum()
-        
-        def getGrad_q_t(q, q_t):
-            return torch.autograd.functional.jacobian(l, inputs=(q, q_t), create_graph=True)[1]
-     
+
         hessian = torch.func.hessian(l, 1)(q, q_t)
         hessian = torch.diagonal(hessian, offset=0, dim1=0, dim2=2).permute((2,0,1))
         pinv = torch.linalg.pinv(hessian)
-        grad_q = torch.autograd.grad(outputs=l(q, q_t), inputs=(q, q_t), create_graph=True)[0]
+        grad_q = torch.func.grad(l, 0)(q, q_t)
         grad_q = torch.reshape(grad_q, [grad_q.shape[0],grad_q.shape[1],1])
-        lastTerm = torch.autograd.functional.jacobian(getGrad_q_t, inputs=(q, q_t), create_graph=True)[0]
+        lastTerm = torch.func.jacrev(torch.func.jacrev(l, 1), 0)(q, q_t)
         lastTerm = torch.diagonal(lastTerm, offset=0, dim1=0, dim2=2).permute((2,0,1))
         q_t_reshaped = torch.reshape(q_t, [q_t.shape[0],q_t.shape[1],1])
         d2q_dt = torch.bmm(pinv, (grad_q - torch.bmm(lastTerm, q_t_reshaped)))
@@ -79,6 +77,7 @@ def train(seed=0, hidden_dim=200, learn_rate=1e-3, total_steps=2000, print_every
     
     stats = {'train_loss': [], 'test_loss': []}
     for step in range(total_steps+1):
+        start_time = time.time()
         
         # train step
         d2q_hat_train = model.time_derivative(y_train)
@@ -93,7 +92,8 @@ def train(seed=0, hidden_dim=200, learn_rate=1e-3, total_steps=2000, print_every
         stats['train_loss'].append(loss.item())
         stats['test_loss'].append(test_loss.item())
         if verbose and step % print_every == 0:
-            print("step {}, train_loss {:.4e}, test_loss {:.4e}".format(step, loss.item(), test_loss.item()))
+            end_time = time.time()
+            print("step {}, train_loss {:.4e}, test_loss {:.4e}, time: ".format(step, loss.item(), test_loss.item(), end_time - start_time))
 
     d2q_hat_train = model.time_derivative(y_train)
     train_dist = (d2q_train - d2q_hat_train)**2
@@ -107,7 +107,7 @@ def train(seed=0, hidden_dim=200, learn_rate=1e-3, total_steps=2000, print_every
     return model, stats
 
 if __name__ == "__main__":
-    model, stats = train()
+    model, stats = train(print_every=2)
     
     scriptPath = os.path.dirname(os.path.abspath(__file__))
     dataSetFolder = os.path.join(scriptPath, "Models")
