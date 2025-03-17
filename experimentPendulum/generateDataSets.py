@@ -2,6 +2,7 @@ from DynamicSystemIntegrator import ClassicHamiltonian, SystemsIntegrator
 import autograd.numpy as np
 import os
 
+dataSetVariables = ['hamiltonian_coords_ys', 'hamiltonian_coords_dys']
 def get_trajectory(hamiltonian, t_span=[0,3], timescale=15, radius=None, y0=None, noise_std=0.1):
     t_eval = np.linspace(t_span[0], t_span[1], int(timescale*(t_span[1]-t_span[0])))
     
@@ -36,7 +37,7 @@ def get_datasets(hamiltonian, seed=0, samples=75, train_val_test_split=[1/3, 1/3
     val_i = int( data_set_size * train_val_test_split[0])
     test_i = val_i + int(data_set_size * train_val_test_split[1])
     data_train, data_val, data_test = {"label": "train", "system": "pendulum"}, {"label": "val", "system": "pendulum"}, {"label": "test", "system": "pendulum"}
-    for k in ['hamiltonian_coords_ys', 'hamiltonian_coords_dys']:
+    for k in dataSetVariables:
         data_train[k], data_val[k], data_test[k] = data[k][:val_i], data[k][val_i:test_i], data[k][test_i:]
 
     return data_train, data_val, data_test
@@ -59,7 +60,7 @@ def get_pendulum_dataset_with_cache(forceNew=False):
     dataSets = []
     for label in ["train", "val", "test"]:
         dataSet = {"label": label, "system": "pendulum"}
-        for variable in ["hamiltonian_coords_ys", "hamiltonian_coords_dys"]:
+        for variable in dataSetVariables:
             path = os.path.join(dataSetFolder, f"{label}_pendulum_{variable}.npy")
             dataSetIsAvailable = dataSetIsAvailable and os.path.exists(path)
             if dataSetIsAvailable:
@@ -73,14 +74,13 @@ def get_pendulum_dataset_with_cache(forceNew=False):
         print("DataSet not available, creating a new one")
         dataSets = get_pendulum_dataset()
         for dataSet in dataSets:
-            np.save(os.path.join(dataSetFolder, f"""{dataSet["label"]}_{dataSet["system"]}_hamiltonian_coords_ys.npy"""), dataSet["hamiltonian_coords_ys"])
-            np.save(os.path.join(dataSetFolder, f"""{dataSet["label"]}_{dataSet["system"]}_hamiltonian_coords_dys.npy"""), dataSet["hamiltonian_coords_dys"])
+            for variable in dataSetVariables:
+                np.save(os.path.join(dataSetFolder, f"""{dataSet["label"]}_{dataSet["system"]}_{variable}.npy"""), dataSet[variable])
         return dataSets
 
 
 if __name__ == '__main__':
     for dataSet in get_pendulum_dataset_with_cache():
         print(f"""{dataSet["label"].upper()} dataset for {dataSet["system"]} simulation""")
-        print(dataSet["hamiltonian_coords_ys"])
-        print(dataSet["hamiltonian_coords_dys"])
-        print()
+        for variable in dataSetVariables:
+            print(dataSet[variable])
