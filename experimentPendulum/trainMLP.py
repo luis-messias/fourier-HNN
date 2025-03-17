@@ -46,11 +46,19 @@ def train(seed=0, hidden_dim=200, learn_rate=1e-3, total_steps=2000, print_every
     y_val  = torch.cat((q, p), dim=1)
     dy_val = torch.cat((dq, dp), dim=1)
 
-    stats = {'train_loss': [], 'test_loss': []}
+    if torch.cuda.is_available():
+        print("Cuda Available")
+        model.to("cuda")
+        y_train = y_train.to("cuda")
+        dy_train = dy_train.to("cuda")
+        y_val = y_val.to("cuda")
+        dy_val = dy_val.to("cuda")
+    
+    stats = {'train_loss': [], 'test_loss': []}    
     for step in range(total_steps+1):
         
         # train step
-        dy_hat_train = model.forward(y_train)
+        dy_hat_train = model.forward(y_train.to("cuda"))
         loss = lossL2(dy_train, dy_hat_train)
         loss.backward() ; optim.step() ; optim.zero_grad()
         
