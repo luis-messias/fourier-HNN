@@ -2,6 +2,7 @@ import generateDataSets
 
 import torch
 from torch import nn
+from torch.utils.data import Dataset, DataLoader
 import numpy as np
 import os
 import time
@@ -52,6 +53,33 @@ class LNN(torch.nn.Module):
         d2q_dt = torch.bmm(pinv, (grad_q - torch.bmm(lastTerm, q_t_reshaped)))
         d2q_dt = torch.reshape(d2q_dt, [d2q_dt.shape[0],d2q_dt.shape[1]])
         return d2q_dt
+    
+class LagrangianDataSet(Dataset):
+    """Face Landmarks dataset."""
+
+    def __init__(self, type="Train"):
+        trainDataSet, valDataSet, testDataSet = generateDataSets.get_pendulum_dataset_with_cache()
+        
+        if type == "Train":
+            self.dataSet = trainDataSet
+        elif type == "Val":
+            self.dataSet = valDataSet
+        elif type == "Test":
+            self.dataSet = testDataSet
+            
+        self.q = torch.tensor(self.dataSet["q"], dtype=torch.float32, requires_grad=True)
+        self.dq = torch.tensor(self.dataSet["dq"], dtype=torch.float32, requires_grad=True)
+        self.d2q = torch.tensor(self.dataSet["d2q"], dtype=torch.float32, requires_grad=True)
+        self.y = torch.cat((self.q, self.dq), dim=1)
+
+    def __len__(self):
+        return self.q.shape[0]
+
+    def __getitem__(self, idx):
+        if torch.is_tensor(idx):
+            idx = idx.tolist()
+
+        return self.y[idx], self.d2q[idx]
 
 def train(seed=0, hidden_dim=200, learn_rate=1e-3, total_steps=2000, print_every=200, nonlinearity=torch.tanh, verbose=True):
     torch.manual_seed(seed)
@@ -62,52 +90,60 @@ def train(seed=0, hidden_dim=200, learn_rate=1e-3, total_steps=2000, print_every
     
     optim = torch.optim.Adam(model.parameters(), learn_rate, weight_decay=1e-4)
     lossL2 = nn.MSELoss()
-
-    trainDataSet, valDataSet, _ = generateDataSets.get_pendulum_dataset_with_cache()
     
-    q = torch.tensor(trainDataSet["q"], dtype=torch.float32, requires_grad=True)
-    dq = torch.tensor(trainDataSet["dq"], dtype=torch.float32, requires_grad=True)
-    d2q_train = torch.tensor(trainDataSet["d2q"], dtype=torch.float32, requires_grad=True)
-    y_train = torch.cat((q, dq), dim=1)
+    TrainDataloader = DataLoader(LagrangianDataSet(type='Train'), batch_size=800, shuffle=True)
+    ValDataloader = DataLoader(LagrangianDataSet(type='Val'), batch_size=800, shuffle=True)
     
-    q = torch.tensor(valDataSet["q"], dtype=torch.float32, requires_grad=True)
-    dq = torch.tensor(valDataSet["dq"], dtype=torch.float32, requires_grad=True)
-    d2q_val = torch.tensor(valDataSet["d2q"], dtype=torch.float32, requires_grad=True)
-    y_val = torch.cat((q, dq), dim=1)
+    if torch.cuda.is_available():
+        print("Cuda Available")
+        model.to("cuda")
     
-    stats = {'train_loss': [], 'test_loss': []}
+    stats = {'train_loss': [], 'val_loss': []}
     for step in range(total_steps+1):
         start_time = time.time()
+        loss = 0
+        for i_batch, sample_batched in enumerate(TrainDataloader):
+            y_train, d2q_train = sample_batched
+            if torch.cuda.is_available():
+                y_train = y_train.to('cuda')
+                d2q_train = d2q_train.to('cuda')
+                
+            d2q_hat_train = model.time_derivative(y_train)
+            loss_batch = lossL2(d2q_train, d2q_hat_train)
+            loss_batch.backward() ; optim.step() ; optim.zero_grad()
+            loss += loss_batch.item()
         
-        # train step
-        d2q_hat_train = model.time_derivative(y_train)
-        loss = lossL2(d2q_train, d2q_hat_train)
-        loss.backward() ; optim.step() ; optim.zero_grad()
-        
-        # run test data
-        d2q_hat_val_hat = model.time_derivative(y_val)
-        test_loss = lossL2(d2q_val, d2q_hat_val_hat)
+        val_loss = loss
+        for i_batch, sample_batched in enumerate(ValDataloader):
+            y_val, d2q_val = sample_batched
+            if torch.cuda.is_available():
+                y_val = y_val.to('cuda')
+                d2q_val = d2q_val.to('cuda')
+                
+            d2q_hat_val = model.time_derivative(y_val)
+            val_loss = lossL2(d2q_val, d2q_hat_val).item()
+
 
         # logging
-        stats['train_loss'].append(loss.item())
-        stats['test_loss'].append(test_loss.item())
+        stats['train_loss'].append(loss)
+        stats['val_loss'].append(val_loss)
         if verbose and step % print_every == 0:
             end_time = time.time()
-            print("step {}, train_loss {:.4e}, test_loss {:.4e}, time: {}".format(step, loss.item(), test_loss.item(), end_time - start_time))
+            print("step {}, train_loss {:.4e}, val_loss {:.4e}, time: {}".format(step, loss, val_loss, end_time - start_time))
 
-    d2q_hat_train = model.time_derivative(y_train)
-    train_dist = (d2q_train - d2q_hat_train)**2
-    d2q_hat_val_hat = model.time_derivative(y_val)
-    val_dist = (d2q_val - d2q_hat_val_hat)**2
+    # d2q_hat_train = model.time_derivative(y_train)
+    # train_dist = (d2q_train - d2q_hat_train)**2
+    # d2q_hat_val_hat = model.time_derivative(y_val)
+    # val_dist = (d2q_val - d2q_hat_val_hat)**2
 
-    print('Final train loss {:.4e} +/- {:.4e}\nFinal test loss {:.4e} +/- {:.4e}'
-        .format(train_dist.mean().item(), train_dist.std().item()/np.sqrt(train_dist.shape[0]),
-                val_dist.mean().item(), val_dist.std().item()/np.sqrt(val_dist.shape[0])))
+    # print('Final train loss {:.4e} +/- {:.4e}\nFinal test loss {:.4e} +/- {:.4e}'
+    #     .format(train_dist.mean().item(), train_dist.std().item()/np.sqrt(train_dist.shape[0]),
+    #             val_dist.mean().item(), val_dist.std().item()/np.sqrt(val_dist.shape[0])))
 
     return model, stats
 
 if __name__ == "__main__":
-    model, stats = train(print_every=2)
+    model, stats = train(print_every=50)
     
     scriptPath = os.path.dirname(os.path.abspath(__file__))
     dataSetFolder = os.path.join(scriptPath, "Models")
