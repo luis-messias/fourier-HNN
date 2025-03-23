@@ -98,5 +98,5 @@ if __name__ == "__main__":
     dataSetFolder = os.path.join(scriptPath, "Models")
 
     label = '-mlp'
-    path = '{}/{}{}.tar'.format(dataSetFolder, "pendulum", label)
+    path = '{}/{}{}.tar'.format(dataSetFolder, "double_pendulum", label)
     torch.save(model.state_dict(), path)
