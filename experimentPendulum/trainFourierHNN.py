@@ -68,7 +68,7 @@ class FourierHNN(torch.nn.Module):
                     M[i,j] *= -1
         return M
 
-def train(seed=0, hidden_dim=200, learn_rate=1e-3, total_steps=4000, print_every=200, B_Fourier=torch.eye(2), Forward_Inputs=True, Learn_B_Fourier=True, nonlinearity=torch.tanh, verbose=True):
+def train(seed=0, hidden_dim=200, learn_rate=1e-3, total_steps=2000, print_every=200, B_Fourier=torch.eye(2), Forward_Inputs=True, Learn_B_Fourier=True, nonlinearity=torch.tanh, verbose=True):
     torch.manual_seed(seed)
     np.random.seed(seed)
 
