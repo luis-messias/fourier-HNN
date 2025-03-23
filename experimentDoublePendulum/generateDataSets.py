@@ -60,7 +60,7 @@ def get_datasets(hamiltonian, seed=0, samples=75, train_val_test_split=[1/3, 1/3
     data_set_size = len(data['q1'])
     val_i = int( data_set_size * train_val_test_split[0])
     test_i = val_i + int(data_set_size * train_val_test_split[1])
-    data_train, data_val, data_test = {"label": "train", "system": "pendulum"}, {"label": "val", "system": "pendulum"}, {"label": "test", "system": "pendulum"}
+    data_train, data_val, data_test = {"label": "train", "system": "double_pendulum"}, {"label": "val", "system": "double_pendulum"}, {"label": "test", "system": "double_pendulum"}
     for k in dataSetVariables:
         data_train[k], data_val[k], data_test[k] = data[k][:val_i], data[k][val_i:test_i], data[k][test_i:]
 
