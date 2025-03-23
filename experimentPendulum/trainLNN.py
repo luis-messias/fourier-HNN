@@ -1,4 +1,4 @@
-import generateDataSets
+import experimentPendulum.generateDataSets as generateDataSets
 
 import torch
 from torch import nn

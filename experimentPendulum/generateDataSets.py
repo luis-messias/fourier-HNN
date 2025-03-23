@@ -9,9 +9,9 @@ def get_trajectory(hamiltonian, t_span=[0,3], timescale=15, radius=None, y0=None
     # get initial state
     if y0 is None:
         y0 = np.random.rand(2)*2.-1
-    if radius is None:
-        radius = np.random.rand() + 1.3 # sample a range of radii
-    y0 = y0 / np.sqrt((y0**2).sum()) * radius ## set the appropriate radius
+        if radius is None:
+            radius = np.random.rand() + 1.3 # sample a range of radii
+        y0 = y0 / np.sqrt((y0**2).sum()) * radius ## set the appropriate radius
     
     t, y, dy = SystemsIntegrator.integrateHamiltonian(hamiltonian, y0, t_eval)
     # add noise
