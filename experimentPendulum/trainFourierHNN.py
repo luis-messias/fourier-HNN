@@ -5,16 +5,6 @@ from torch import nn
 import numpy as np
 import os
 
-
-# basicGaussianScale = 1
-# B_out_dim = 10
-# B_Global = torch.randn(2, B_out_dim) * basicGaussianScale
-# print(f"Fourier Gaussian, scale: {basicGaussianScale} out_dim {B_out_dim}")
-
-B_Global = torch.eye(2)
-print("Fourier Basic")
-
-
 class MLP(torch.nn.Module):
   def __init__(self, input_dim, hidden_dim, output_dim, nonlinearity=torch.tanh):
     super(MLP, self).__init__()
@@ -33,17 +23,24 @@ class MLP(torch.nn.Module):
     return self.linear3(h)
 
 class FourierHNN(torch.nn.Module):
-    '''Learn arbitrary vector fields that are sums of conservative and solenoidal fields'''
-    def __init__(self, input_dim, hidden_dim, assume_canonical_coords=True, nonlinearity=torch.tanh, B_Fourier=B_Global):
+    def __init__(self, input_dim, hidden_dim, B_Fourier, Learn_B_Fourier, Forward_Inputs, assume_canonical_coords=True, nonlinearity=torch.tanh):
         super(FourierHNN, self).__init__()
-        self.B_Fourier = B_Fourier
-        mlp_input_dim = B_Global.shape[1]*2 + 2
+        self.B_Fourier = torch.nn.Parameter(B_Fourier)   
+        self.B_Fourier.requires_grad = Learn_B_Fourier
+        self.forwardInputs = Forward_Inputs
+        if Forward_Inputs:  
+            mlp_input_dim = B_Fourier.shape[1]*2 + 2
+        else:
+            mlp_input_dim = B_Fourier.shape[1]*2
         self.differentiable_model = MLP(mlp_input_dim, hidden_dim, 1, nonlinearity)
         self.assume_canonical_coords = assume_canonical_coords
         self.M = self.permutation_tensor(input_dim) # Levi-Civita permutation tensor
 
     def forward(self, y):
-        z = torch.column_stack([y, torch.sin(y @ self.B_Fourier), torch.cos(y @ self.B_Fourier)])
+        if self.forwardInputs:  
+            z = torch.column_stack([y, torch.sin(y @ self.B_Fourier), torch.cos(y @ self.B_Fourier)])
+        else:
+            z = torch.column_stack([ torch.sin(y @ self.B_Fourier), torch.cos(y @ self.B_Fourier)])
         hamiltonian = self.differentiable_model(z)
         assert hamiltonian.dim() == 2 and hamiltonian.shape[1] == 1, "Output tensor should have shape [batch_size, 1]"
         return hamiltonian
@@ -71,11 +68,11 @@ class FourierHNN(torch.nn.Module):
                     M[i,j] *= -1
         return M
 
-def train(seed=0, hidden_dim=200, learn_rate=1e-3, total_steps=2000, print_every=200, nonlinearity=torch.tanh, verbose=True):
+def train(seed=0, hidden_dim=200, learn_rate=1e-3, total_steps=4000, print_every=200, B_Fourier=torch.eye(2), Forward_Inputs=True, Learn_B_Fourier=True, nonlinearity=torch.tanh, verbose=True):
     torch.manual_seed(seed)
     np.random.seed(seed)
 
-    model = FourierHNN(2, hidden_dim, nonlinearity=nonlinearity)
+    model = FourierHNN(2, hidden_dim, B_Fourier, Learn_B_Fourier, Forward_Inputs, nonlinearity=nonlinearity)
     
     optim = torch.optim.Adam(model.parameters(), learn_rate, weight_decay=1e-4)
     lossL2 = nn.MSELoss()
@@ -135,11 +132,34 @@ def train(seed=0, hidden_dim=200, learn_rate=1e-3, total_steps=2000, print_every
     return model, stats
 
 if __name__ == "__main__":
-    model, stats = train()
     
-    scriptPath = os.path.dirname(os.path.abspath(__file__))
-    dataSetFolder = os.path.join(scriptPath, "Models")
+    config_list = []
+    for forward_inputs in (True, False):
+        for Learn_B in (True, False):
+            learnString = "Learn" if Learn_B else "DontLearn"
+            forwardString = "ForwardInputs" if forward_inputs else "DontForwardInputs"
+            
+            # Basic fourier
+            B_basic = torch.eye(2)
+            config_list.append({"B": B_basic, "Learn_B": Learn_B, "Forward_Inputs": forward_inputs, "label": f"Basic_{learnString}_{forwardString}"})
+            
+            # Gaussian Fourier
+            basicGaussianScale = 1
+            B_out_dim = 10
+            B_gaussian = torch.randn(2, B_out_dim) * basicGaussianScale
+            config_list.append({"B": B_gaussian, "Learn_B": Learn_B, "Forward_Inputs": forward_inputs, "label": f"Gaussian_{B_out_dim}_{basicGaussianScale}__{learnString}_{forwardString}"})
 
-    label = '-FourierHNN'
-    path = '{}/{}{}.tar'.format(dataSetFolder, "pendulum", label)
-    torch.save(model.state_dict(), path)
+            # Positional
+            B_Positional = torch.cat([torch.eye(2), 2*torch.eye(2), 3*torch.eye(2)], dim=1)
+            config_list.append({"B": B_Positional, "Learn_B": Learn_B, "Forward_Inputs": forward_inputs, "label": f"Positional_{learnString}_{forwardString}"})
+    
+    for config in config_list:
+        print(config)
+        model, stats = train(B_Fourier=config["B"], Learn_B_Fourier=config["Learn_B"], Forward_Inputs=config["Forward_Inputs"])
+    
+        scriptPath = os.path.dirname(os.path.abspath(__file__))
+        dataSetFolder = os.path.join(scriptPath, "Models")
+
+        label = f'-FourierHNN-{config["label"]}'
+        path = '{}/{}{}.tar'.format(dataSetFolder, "pendulum", label)
+        torch.save(model.state_dict(), path)
