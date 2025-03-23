@@ -12,7 +12,7 @@ def hamiltonian_fn(coords):
     H = t1_num/t1_denom + t2
     return H
 
-def get_trajectory(hamiltonian, t_span=[0,3], timescale=15, radius=None, y0=None, noise_std=0.1):
+def get_trajectory(hamiltonian, t_span=[0,3], timescale=15, radius=None, y0=None, noise_std=0.05):
     t_eval = np.linspace(t_span[0], t_span[1], int(timescale*(t_span[1]-t_span[0])))
     
     # get initial state
@@ -31,7 +31,7 @@ def get_trajectory(hamiltonian, t_span=[0,3], timescale=15, radius=None, y0=None
 
     return q1, q2, p1, p2, dq1, dq2, dp1, dp2, t_eval
 
-def get_datasets(hamiltonian, seed=0, samples=75, train_val_test_split=[1/3, 1/3, 1/3]):
+def get_datasets(hamiltonian, seed=0, samples=200, train_val_test_split=[1/3, 1/3, 1/3]):
     np.random.seed(seed)
     data = {}
     q1, q2, p1, p2, dq1, dq2, dp1, dp2 = [], [], [], [], [], [], [], []
@@ -98,7 +98,7 @@ def get_pendulum_dataset_with_cache(forceNew=False):
 
 
 if __name__ == '__main__':
-    datasets = get_pendulum_dataset_with_cache(forceNew=False)
+    datasets = get_pendulum_dataset_with_cache(forceNew=True)
     for dataSet in get_pendulum_dataset_with_cache():
         print(f"""{dataSet["label"].upper()} dataset for {dataSet["system"]} simulation""")
         for variable in dataSetVariables:
