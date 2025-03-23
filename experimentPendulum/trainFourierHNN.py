@@ -5,19 +5,15 @@ from torch import nn
 import numpy as np
 import os
 
-mlp_basic_Mapping_input_dim = 6
-def basicMapping(y):
-    z = torch.column_stack([torch.sin(y[:,0]),
-                                torch.cos(y[:,0]),
-                                y[:,0],
-                                torch.sin(y[:,1]),
-                                torch.cos(y[:,1]),
-                                y[:,1]])
-    return z
 
-mlp_input_dim = mlp_basic_Mapping_input_dim
-def fourierLayer(y):
-    return basicMapping(y) 
+# basicGaussianScale = 1
+# B_out_dim = 10
+# B_Global = torch.randn(2, B_out_dim) * basicGaussianScale
+# print(f"Fourier Gaussian, scale: {basicGaussianScale} out_dim {B_out_dim}")
+
+B_Global = torch.eye(2)
+print("Fourier Basic")
+
 
 class MLP(torch.nn.Module):
   def __init__(self, input_dim, hidden_dim, output_dim, nonlinearity=torch.tanh):
@@ -36,16 +32,18 @@ class MLP(torch.nn.Module):
     h = self.nonlinearity( self.linear2(h) )
     return self.linear3(h)
 
-class NaiveFourierHNN(torch.nn.Module):
+class FourierHNN(torch.nn.Module):
     '''Learn arbitrary vector fields that are sums of conservative and solenoidal fields'''
-    def __init__(self, input_dim, differentiable_model, assume_canonical_coords=True):
-        super(NaiveFourierHNN, self).__init__()
-        self.differentiable_model = differentiable_model
+    def __init__(self, input_dim, hidden_dim, assume_canonical_coords=True, nonlinearity=torch.tanh, B_Fourier=B_Global):
+        super(FourierHNN, self).__init__()
+        self.B_Fourier = B_Fourier
+        mlp_input_dim = B_Global.shape[1]*2 + 2
+        self.differentiable_model = MLP(mlp_input_dim, hidden_dim, 1, nonlinearity)
         self.assume_canonical_coords = assume_canonical_coords
         self.M = self.permutation_tensor(input_dim) # Levi-Civita permutation tensor
 
     def forward(self, y):
-        z = fourierLayer(y)
+        z = torch.column_stack([y, torch.sin(y @ self.B_Fourier), torch.cos(y @ self.B_Fourier)])
         hamiltonian = self.differentiable_model(z)
         assert hamiltonian.dim() == 2 and hamiltonian.shape[1] == 1, "Output tensor should have shape [batch_size, 1]"
         return hamiltonian
@@ -77,8 +75,7 @@ def train(seed=0, hidden_dim=200, learn_rate=1e-3, total_steps=2000, print_every
     torch.manual_seed(seed)
     np.random.seed(seed)
 
-    nn_model = MLP(mlp_input_dim, hidden_dim, 1, nonlinearity)
-    model = NaiveFourierHNN(2, differentiable_model=nn_model)
+    model = FourierHNN(2, hidden_dim, nonlinearity=nonlinearity)
     
     optim = torch.optim.Adam(model.parameters(), learn_rate, weight_decay=1e-4)
     lossL2 = nn.MSELoss()
@@ -143,6 +140,6 @@ if __name__ == "__main__":
     scriptPath = os.path.dirname(os.path.abspath(__file__))
     dataSetFolder = os.path.join(scriptPath, "Models")
 
-    label = '-NaiveFourierHNN'
+    label = '-FourierHNN'
     path = '{}/{}{}.tar'.format(dataSetFolder, "pendulum", label)
     torch.save(model.state_dict(), path)
