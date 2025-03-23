@@ -72,7 +72,7 @@ def train(seed=0, hidden_dim=200, learn_rate=1e-3, total_steps=2000, print_every
     nn_model = MLP(3, hidden_dim, 1, nonlinearity)
     model = NaiveFourierHNN(2, differentiable_model=nn_model)
     
-    optim = torch.optim.Adam(model.parameters(), learn_rate, weight_decay=1e-5)
+    optim = torch.optim.Adam(model.parameters(), learn_rate, weight_decay=1e-4)
     lossL2 = nn.MSELoss()
 
     trainDataSet, valDataSet, _ = generateDataSets.get_pendulum_dataset_with_cache()
