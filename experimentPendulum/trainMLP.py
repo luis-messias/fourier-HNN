@@ -22,6 +22,9 @@ class MLP(torch.nn.Module):
     h = self.nonlinearity( self.linear2(h) )
     return self.linear3(h)
 
+  def time_derivative(self, y):
+    return self.forward(y)
+
 def train(seed=0, hidden_dim=200, learn_rate=1e-3, total_steps=2000, print_every=200, nonlinearity=torch.tanh, verbose=True):
     torch.manual_seed(seed)
     np.random.seed(seed)
