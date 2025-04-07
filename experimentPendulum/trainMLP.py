@@ -56,12 +56,15 @@ def train(seed=0, hidden_dim=200, learn_rate=1e-3, total_steps=2000, print_every
         dy_train = dy_train.to("cuda")
         y_val = y_val.to("cuda")
         dy_val = dy_val.to("cuda")
+        device = "cuda"
+    else:
+       device = "cpu"
     
     stats = {'train_loss': [], 'test_loss': []}    
     for step in range(total_steps+1):
         
         # train step
-        dy_hat_train = model.forward(y_train.to("cuda"))
+        dy_hat_train = model.forward(y_train.to(device))
         loss = lossL2(dy_train, dy_hat_train)
         loss.backward() ; optim.step() ; optim.zero_grad()
         
