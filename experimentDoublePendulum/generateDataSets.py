@@ -12,7 +12,7 @@ def hamiltonian_fn(coords):
     H = t1_num/t1_denom + t2
     return H
 
-def get_trajectory(hamiltonian, t_span=[0,3], timescale=15, radius=None, y0=None, noise_std=0.05):
+def get_trajectory(hamiltonian, t_span=[0,10], timescale=15, radius=None, y0=None, noise_std=0.05, radiusMul=1):
     t_eval = np.linspace(t_span[0], t_span[1], int(timescale*(t_span[1]-t_span[0])))
     
     # get initial state
@@ -20,7 +20,7 @@ def get_trajectory(hamiltonian, t_span=[0,3], timescale=15, radius=None, y0=None
         y0 = np.random.rand(4)*2.-1
         if radius is None:
             radius = np.random.rand() + 1.3 # sample a range of radii
-        y0 = y0 / np.sqrt((y0**2).sum()) * radius ## set the appropriate radius
+        y0 = y0 / np.sqrt((y0**2).sum()) * radius * radiusMul## set the appropriate radius
 
     t, y, dy = SystemsIntegrator.integrateHamiltonian(hamiltonian, y0, t_eval)
     # add noise
@@ -31,13 +31,13 @@ def get_trajectory(hamiltonian, t_span=[0,3], timescale=15, radius=None, y0=None
 
     return q1, q2, p1, p2, dq1, dq2, dp1, dp2, t_eval
 
-def get_datasets(hamiltonian, seed=0, samples=200, train_val_test_split=[1/3, 1/3, 1/3]):
+def get_datasets(hamiltonian, seed=0, samples=201, train_val_test_split=[1/3, 1/3, 1/3], t_span=[0,10], radiusMul=1):
     np.random.seed(seed)
     data = {}
     q1, q2, p1, p2, dq1, dq2, dp1, dp2 = [], [], [], [], [], [], [], []
     
     for s in range(samples):
-        q1_, q2_, p1_, p2_, dq1_, dq2_, dp1_, dp2_, t_eval = get_trajectory(hamiltonian)
+        q1_, q2_, p1_, p2_, dq1_, dq2_, dp1_, dp2_, t_eval = get_trajectory(hamiltonian, t_span=t_span,radiusMul=radiusMul)
         q1.append(q1_.T)
         q2.append(q2_.T)
         dq1.append(dq1_.T)
@@ -66,11 +66,11 @@ def get_datasets(hamiltonian, seed=0, samples=200, train_val_test_split=[1/3, 1/
 
     return data_train, data_val, data_test
 
-def get_pendulum_dataset():
+def get_pendulum_dataset(t_span=[0,10], radiusMul=1):
     h = ClassicHamiltonian.Hamiltonian(2, hamiltonian_fn)
-    return get_datasets(h)
+    return get_datasets(h, t_span=t_span, radiusMul=radiusMul)
 
-def get_pendulum_dataset_with_cache(forceNew=False):
+def get_pendulum_dataset_with_cache(forceNew=False, t_span=[0,10] ,radiusMul=1, customName=""):
     scriptPath = os.path.dirname(os.path.abspath(__file__))
     dataSetFolder = os.path.join(scriptPath, "Data")
     
@@ -79,7 +79,7 @@ def get_pendulum_dataset_with_cache(forceNew=False):
     for label in ["train", "val", "test"]:
         dataSet = {"label": label, "system": "double_pendulum"}
         for variable in dataSetVariables:
-            path = os.path.join(dataSetFolder, f"{label}_double_pendulum_{variable}.npy")
+            path = os.path.join(dataSetFolder, f"{label}_double_pendulum_{variable}{customName}.npy")
             dataSetIsAvailable = dataSetIsAvailable and os.path.exists(path)
             if dataSetIsAvailable:
                 dataSet[variable] = np.load(path)
@@ -90,15 +90,15 @@ def get_pendulum_dataset_with_cache(forceNew=False):
         return dataSets
     else:
         print("DataSet not available, creating a new one")
-        dataSets = get_pendulum_dataset()
+        dataSets = get_pendulum_dataset(t_span=t_span, radiusMul=radiusMul)
         for dataSet in dataSets:
             for variable in dataSetVariables:
-                np.save(os.path.join(dataSetFolder, f"""{dataSet["label"]}_{dataSet["system"]}_{variable}.npy"""), dataSet[variable])
+                np.save(os.path.join(dataSetFolder, f"""{dataSet["label"]}_{dataSet["system"]}_{variable}{customName}.npy"""), dataSet[variable])
         return dataSets
 
 
 if __name__ == '__main__':
-    datasets = get_pendulum_dataset_with_cache(forceNew=True)
+    datasets = get_pendulum_dataset_with_cache(forceNew=False)
     for dataSet in get_pendulum_dataset_with_cache():
         print(f"""{dataSet["label"].upper()} dataset for {dataSet["system"]} simulation""")
         for variable in dataSetVariables:
