@@ -152,7 +152,7 @@ def evaluateModel(model):
     dy_hat_test = model.time_derivative(y_test)
     test_dist = (dy_test - dy_hat_test)**2
 
-    print('Final test loss {:.4e} +/- {:.4e}'
+    print('Final test loss {:.2e} +/- {:.2e}'
         .format(test_dist.mean().item(), test_dist.std().item()/np.sqrt(test_dist.shape[0])))
     
     y_test_trajectory_list = np.split(y_test.detach().numpy(), 1125/45)
@@ -171,12 +171,23 @@ def evaluateModel(model):
 
     test_coords_MSE /= len(y_test_trajectory_list)
     energy_MSE /= len(y_test_trajectory_list)
-    print("Coords MSE", test_coords_MSE)
-    print("Energy MSE", energy_MSE)
+    print('Final test loss {:.2e} +/- {:.2e}'
+        .format(test_dist.mean().item(), test_dist.std().item()/np.sqrt(test_dist.shape[0])))
+    print("Coords MSE {:.2e}".format(test_coords_MSE))
+    print("Energy MSE {:.2e}".format(energy_MSE))
+    return test_dist.mean().item(), test_coords_MSE, energy_MSE
 
 if __name__ == "__main__":
+    results = []
     for m in getModels():
         model, label = m
         print("Evaluating ", label)
-        evaluateModel(model)
+        MSE, MSE_coords, MSE_energy = evaluateModel(model)
+        results.append({"Model": label, "MSE": MSE, "MSE_coords": MSE_coords, "MSE_energy": MSE_energy})
         print("-----------------------------\n")
+    
+    final = {"MSE": sorted(results, key=lambda d: d['MSE']),
+             "MSE_coords": sorted(results, key=lambda d: d['MSE_coords']),
+             "MSE_Energy": sorted(results, key=lambda d: d['MSE_energy'])}
+    print(results)
+    print(final)
