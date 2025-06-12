@@ -1,0 +1,167 @@
+{'MSE': [
+        {'Model': '-hnn', 'MSE': 0.03495856374502182, 'MSE_coords': 0.05972722095719821, 'MSE_energy': 0.25269117769019556
+        },
+        {'Model': '-mlp', 'MSE': 0.03501315042376518, 'MSE_coords': 0.06109444687855845, 'MSE_energy': 0.2597173390460428
+        },
+        {'Model': '-FourierHNN2-Basic_DontLearn_ForwardInputs', 'MSE': 0.03501392900943756, 'MSE_coords': 0.06242857684205688, 'MSE_energy': 0.25365138142582305
+        },
+        {'Model': '-FourierHNN-Basic_Learn_DontForwardInputs', 'MSE': 0.03501664847135544, 'MSE_coords': 0.06123061844643953, 'MSE_energy': 0.25293728417631955
+        },
+        {'Model': '-FourierHNN2-Basic_Learn_ForwardInputs', 'MSE': 0.035019401460886, 'MSE_coords': 0.0625279090014402, 'MSE_energy': 0.25383678510295304
+        },
+        {'Model': '-FourierHNN2-Basic_Learn_DontForwardInputs', 'MSE': 0.03504970669746399, 'MSE_coords': 0.0612218404728967, 'MSE_energy': 0.2531081596026163
+        },
+        {'Model': '-FourierHNN2-Basic_DontLearn_DontForwardInputs', 'MSE': 0.03508252650499344, 'MSE_coords': 0.0619550588965402, 'MSE_energy': 0.25334517557137226
+        },
+        {'Model': '-NaiveFourierHNN', 'MSE': 0.035082533955574036, 'MSE_coords': 0.06195507387611789, 'MSE_energy': 0.25334544567423267
+        },
+        {'Model': '-FourierHNN2-Gaussian_10_1__Learn_ForwardInputs', 'MSE': 0.03528796508908272, 'MSE_coords': 0.0626497547713626, 'MSE_energy': 0.25308430820774763
+        },
+        {'Model': '-FourierHNN-Basic_Learn_ForwardInputs', 'MSE': 0.0354142040014267, 'MSE_coords': 0.06318801313185368, 'MSE_energy': 0.25309645138732134
+        },
+        {'Model': '-FourierHNN2-Positional_Learn_DontForwardInputs', 'MSE': 0.03546188399195671, 'MSE_coords': 0.0629096464136958, 'MSE_energy': 0.252741686434176
+        },
+        {'Model': '-FourierHNN2-Gaussian_10_1__Learn_DontForwardInputs', 'MSE': 0.03548610210418701, 'MSE_coords': 0.06324177237246753, 'MSE_energy': 0.25305208196843454
+        },
+        {'Model': '-FourierHNN-Basic_DontLearn_DontForwardInputs', 'MSE': 0.035486917942762375, 'MSE_coords': 0.06216597147840934, 'MSE_energy': 0.25393866955700245
+        },
+        {'Model': '-FourierHNN-Basic_DontLearn_ForwardInputs', 'MSE': 0.03548909351229668, 'MSE_coords': 0.06357846988807095, 'MSE_energy': 0.25350782748482403
+        },
+        {'Model': '-FourierHNN2-Positional_DontLearn_DontForwardInputs', 'MSE': 0.03550568222999573, 'MSE_coords': 0.0630245953510577, 'MSE_energy': 0.25278067893904865
+        },
+        {'Model': '-FourierHNN2-Gaussian_10_1__DontLearn_DontForwardInputs', 'MSE': 0.03551584854722023, 'MSE_coords': 0.06218559026368348, 'MSE_energy': 0.25284272200938107
+        },
+        {'Model': '-FourierHNN2-Gaussian_10_1__DontLearn_ForwardInputs', 'MSE': 0.0355302169919014, 'MSE_coords': 0.06315907939195343, 'MSE_energy': 0.2525330776469441
+        },
+        {'Model': '-FourierHNN2-Positional_Learn_ForwardInputs', 'MSE': 0.03553654998540878, 'MSE_coords': 0.06357134307758766, 'MSE_energy': 0.25305654265379923
+        },
+        {'Model': '-FourierHNN2-Positional_DontLearn_ForwardInputs', 'MSE': 0.03554627299308777, 'MSE_coords': 0.0637593316429804, 'MSE_energy': 0.2530384487260905
+        },
+        {'Model': '-FourierHNN-Gaussian_10_1__DontLearn_DontForwardInputs', 'MSE': 0.03618605434894562, 'MSE_coords': 0.061298707821108744, 'MSE_energy': 0.25362566566678724
+        },
+        {'Model': '-FourierHNN-Gaussian_10_1__Learn_ForwardInputs', 'MSE': 0.036506034433841705, 'MSE_coords': 0.062053911242534704, 'MSE_energy': 0.25270649549460483
+        },
+        {'Model': '-FourierHNN-Positional_Learn_DontForwardInputs', 'MSE': 0.036703191697597504, 'MSE_coords': 0.06291050270622735, 'MSE_energy': 0.25297151172707905
+        },
+        {'Model': '-FourierHNN-Positional_DontLearn_DontForwardInputs', 'MSE': 0.03679635748267174, 'MSE_coords': 0.06282042549682866, 'MSE_energy': 0.253069000542293
+        },
+        {'Model': '-FourierHNN-Gaussian_10_1__DontLearn_ForwardInputs', 'MSE': 0.03683093935251236, 'MSE_coords': 0.06272824195996671, 'MSE_energy': 0.25300575623161914
+        },
+        {'Model': '-FourierHNN-Positional_Learn_ForwardInputs', 'MSE': 0.03684128820896149, 'MSE_coords': 0.0631894183770527, 'MSE_energy': 0.2530074369138513
+        },
+        {'Model': '-FourierHNN-Positional_DontLearn_ForwardInputs', 'MSE': 0.036910075694322586, 'MSE_coords': 0.06325811956686506, 'MSE_energy': 0.25306856925598437
+        },
+        {'Model': '-FourierHNN-Gaussian_10_1__Learn_DontForwardInputs', 'MSE': 0.037020765244960785, 'MSE_coords': 0.06135830789720034, 'MSE_energy': 0.25247512027379004
+        }
+    ], 'MSE_coords': [
+        {'Model': '-hnn', 'MSE': 0.03495856374502182, 'MSE_coords': 0.05972722095719821, 'MSE_energy': 0.25269117769019556
+        },
+        {'Model': '-mlp', 'MSE': 0.03501315042376518, 'MSE_coords': 0.06109444687855845, 'MSE_energy': 0.2597173390460428
+        },
+        {'Model': '-FourierHNN2-Basic_Learn_DontForwardInputs', 'MSE': 0.03504970669746399, 'MSE_coords': 0.0612218404728967, 'MSE_energy': 0.2531081596026163
+        },
+        {'Model': '-FourierHNN-Basic_Learn_DontForwardInputs', 'MSE': 0.03501664847135544, 'MSE_coords': 0.06123061844643953, 'MSE_energy': 0.25293728417631955
+        },
+        {'Model': '-FourierHNN-Gaussian_10_1__DontLearn_DontForwardInputs', 'MSE': 0.03618605434894562, 'MSE_coords': 0.061298707821108744, 'MSE_energy': 0.25362566566678724
+        },
+        {'Model': '-FourierHNN-Gaussian_10_1__Learn_DontForwardInputs', 'MSE': 0.037020765244960785, 'MSE_coords': 0.06135830789720034, 'MSE_energy': 0.25247512027379004
+        },
+        {'Model': '-FourierHNN2-Basic_DontLearn_DontForwardInputs', 'MSE': 0.03508252650499344, 'MSE_coords': 0.0619550588965402, 'MSE_energy': 0.25334517557137226
+        },
+        {'Model': '-NaiveFourierHNN', 'MSE': 0.035082533955574036, 'MSE_coords': 0.06195507387611789, 'MSE_energy': 0.25334544567423267
+        },
+        {'Model': '-FourierHNN-Gaussian_10_1__Learn_ForwardInputs', 'MSE': 0.036506034433841705, 'MSE_coords': 0.062053911242534704, 'MSE_energy': 0.25270649549460483
+        },
+        {'Model': '-FourierHNN-Basic_DontLearn_DontForwardInputs', 'MSE': 0.035486917942762375, 'MSE_coords': 0.06216597147840934, 'MSE_energy': 0.25393866955700245
+        },
+        {'Model': '-FourierHNN2-Gaussian_10_1__DontLearn_DontForwardInputs', 'MSE': 0.03551584854722023, 'MSE_coords': 0.06218559026368348, 'MSE_energy': 0.25284272200938107
+        },
+        {'Model': '-FourierHNN2-Basic_DontLearn_ForwardInputs', 'MSE': 0.03501392900943756, 'MSE_coords': 0.06242857684205688, 'MSE_energy': 0.25365138142582305
+        },
+        {'Model': '-FourierHNN2-Basic_Learn_ForwardInputs', 'MSE': 0.035019401460886, 'MSE_coords': 0.0625279090014402, 'MSE_energy': 0.25383678510295304
+        },
+        {'Model': '-FourierHNN2-Gaussian_10_1__Learn_ForwardInputs', 'MSE': 0.03528796508908272, 'MSE_coords': 0.0626497547713626, 'MSE_energy': 0.25308430820774763
+        },
+        {'Model': '-FourierHNN-Gaussian_10_1__DontLearn_ForwardInputs', 'MSE': 0.03683093935251236, 'MSE_coords': 0.06272824195996671, 'MSE_energy': 0.25300575623161914
+        },
+        {'Model': '-FourierHNN-Positional_DontLearn_DontForwardInputs', 'MSE': 0.03679635748267174, 'MSE_coords': 0.06282042549682866, 'MSE_energy': 0.253069000542293
+        },
+        {'Model': '-FourierHNN2-Positional_Learn_DontForwardInputs', 'MSE': 0.03546188399195671, 'MSE_coords': 0.0629096464136958, 'MSE_energy': 0.252741686434176
+        },
+        {'Model': '-FourierHNN-Positional_Learn_DontForwardInputs', 'MSE': 0.036703191697597504, 'MSE_coords': 0.06291050270622735, 'MSE_energy': 0.25297151172707905
+        },
+        {'Model': '-FourierHNN2-Positional_DontLearn_DontForwardInputs', 'MSE': 0.03550568222999573, 'MSE_coords': 0.0630245953510577, 'MSE_energy': 0.25278067893904865
+        },
+        {'Model': '-FourierHNN2-Gaussian_10_1__DontLearn_ForwardInputs', 'MSE': 0.0355302169919014, 'MSE_coords': 0.06315907939195343, 'MSE_energy': 0.2525330776469441
+        },
+        {'Model': '-FourierHNN-Basic_Learn_ForwardInputs', 'MSE': 0.0354142040014267, 'MSE_coords': 0.06318801313185368, 'MSE_energy': 0.25309645138732134
+        },
+        {'Model': '-FourierHNN-Positional_Learn_ForwardInputs', 'MSE': 0.03684128820896149, 'MSE_coords': 0.0631894183770527, 'MSE_energy': 0.2530074369138513
+        },
+        {'Model': '-FourierHNN2-Gaussian_10_1__Learn_DontForwardInputs', 'MSE': 0.03548610210418701, 'MSE_coords': 0.06324177237246753, 'MSE_energy': 0.25305208196843454
+        },
+        {'Model': '-FourierHNN-Positional_DontLearn_ForwardInputs', 'MSE': 0.036910075694322586, 'MSE_coords': 0.06325811956686506, 'MSE_energy': 0.25306856925598437
+        },
+        {'Model': '-FourierHNN2-Positional_Learn_ForwardInputs', 'MSE': 0.03553654998540878, 'MSE_coords': 0.06357134307758766, 'MSE_energy': 0.25305654265379923
+        },
+        {'Model': '-FourierHNN-Basic_DontLearn_ForwardInputs', 'MSE': 0.03548909351229668, 'MSE_coords': 0.06357846988807095, 'MSE_energy': 0.25350782748482403
+        },
+        {'Model': '-FourierHNN2-Positional_DontLearn_ForwardInputs', 'MSE': 0.03554627299308777, 'MSE_coords': 0.0637593316429804, 'MSE_energy': 0.2530384487260905
+        }
+    ], 'MSE_Energy': [
+        {'Model': '-FourierHNN-Gaussian_10_1__Learn_DontForwardInputs', 'MSE': 0.037020765244960785, 'MSE_coords': 0.06135830789720034, 'MSE_energy': 0.25247512027379004
+        },
+        {'Model': '-FourierHNN2-Gaussian_10_1__DontLearn_ForwardInputs', 'MSE': 0.0355302169919014, 'MSE_coords': 0.06315907939195343, 'MSE_energy': 0.2525330776469441
+        },
+        {'Model': '-hnn', 'MSE': 0.03495856374502182, 'MSE_coords': 0.05972722095719821, 'MSE_energy': 0.25269117769019556
+        },
+        {'Model': '-FourierHNN-Gaussian_10_1__Learn_ForwardInputs', 'MSE': 0.036506034433841705, 'MSE_coords': 0.062053911242534704, 'MSE_energy': 0.25270649549460483
+        },
+        {'Model': '-FourierHNN2-Positional_Learn_DontForwardInputs', 'MSE': 0.03546188399195671, 'MSE_coords': 0.0629096464136958, 'MSE_energy': 0.252741686434176
+        },
+        {'Model': '-FourierHNN2-Positional_DontLearn_DontForwardInputs', 'MSE': 0.03550568222999573, 'MSE_coords': 0.0630245953510577, 'MSE_energy': 0.25278067893904865
+        },
+        {'Model': '-FourierHNN2-Gaussian_10_1__DontLearn_DontForwardInputs', 'MSE': 0.03551584854722023, 'MSE_coords': 0.06218559026368348, 'MSE_energy': 0.25284272200938107
+        },
+        {'Model': '-FourierHNN-Basic_Learn_DontForwardInputs', 'MSE': 0.03501664847135544, 'MSE_coords': 0.06123061844643953, 'MSE_energy': 0.25293728417631955
+        },
+        {'Model': '-FourierHNN-Positional_Learn_DontForwardInputs', 'MSE': 0.036703191697597504, 'MSE_coords': 0.06291050270622735, 'MSE_energy': 0.25297151172707905
+        },
+        {'Model': '-FourierHNN-Gaussian_10_1__DontLearn_ForwardInputs', 'MSE': 0.03683093935251236, 'MSE_coords': 0.06272824195996671, 'MSE_energy': 0.25300575623161914
+        },
+        {'Model': '-FourierHNN-Positional_Learn_ForwardInputs', 'MSE': 0.03684128820896149, 'MSE_coords': 0.0631894183770527, 'MSE_energy': 0.2530074369138513
+        },
+        {'Model': '-FourierHNN2-Positional_DontLearn_ForwardInputs', 'MSE': 0.03554627299308777, 'MSE_coords': 0.0637593316429804, 'MSE_energy': 0.2530384487260905
+        },
+        {'Model': '-FourierHNN2-Gaussian_10_1__Learn_DontForwardInputs', 'MSE': 0.03548610210418701, 'MSE_coords': 0.06324177237246753, 'MSE_energy': 0.25305208196843454
+        },
+        {'Model': '-FourierHNN2-Positional_Learn_ForwardInputs', 'MSE': 0.03553654998540878, 'MSE_coords': 0.06357134307758766, 'MSE_energy': 0.25305654265379923
+        },
+        {'Model': '-FourierHNN-Positional_DontLearn_ForwardInputs', 'MSE': 0.036910075694322586, 'MSE_coords': 0.06325811956686506, 'MSE_energy': 0.25306856925598437
+        },
+        {'Model': '-FourierHNN-Positional_DontLearn_DontForwardInputs', 'MSE': 0.03679635748267174, 'MSE_coords': 0.06282042549682866, 'MSE_energy': 0.253069000542293
+        },
+        {'Model': '-FourierHNN2-Gaussian_10_1__Learn_ForwardInputs', 'MSE': 0.03528796508908272, 'MSE_coords': 0.0626497547713626, 'MSE_energy': 0.25308430820774763
+        },
+        {'Model': '-FourierHNN-Basic_Learn_ForwardInputs', 'MSE': 0.0354142040014267, 'MSE_coords': 0.06318801313185368, 'MSE_energy': 0.25309645138732134
+        },
+        {'Model': '-FourierHNN2-Basic_Learn_DontForwardInputs', 'MSE': 0.03504970669746399, 'MSE_coords': 0.0612218404728967, 'MSE_energy': 0.2531081596026163
+        },
+        {'Model': '-FourierHNN2-Basic_DontLearn_DontForwardInputs', 'MSE': 0.03508252650499344, 'MSE_coords': 0.0619550588965402, 'MSE_energy': 0.25334517557137226
+        },
+        {'Model': '-NaiveFourierHNN', 'MSE': 0.035082533955574036, 'MSE_coords': 0.06195507387611789, 'MSE_energy': 0.25334544567423267
+        },
+        {'Model': '-FourierHNN-Basic_DontLearn_ForwardInputs', 'MSE': 0.03548909351229668, 'MSE_coords': 0.06357846988807095, 'MSE_energy': 0.25350782748482403
+        },
+        {'Model': '-FourierHNN-Gaussian_10_1__DontLearn_DontForwardInputs', 'MSE': 0.03618605434894562, 'MSE_coords': 0.061298707821108744, 'MSE_energy': 0.25362566566678724
+        },
+        {'Model': '-FourierHNN2-Basic_DontLearn_ForwardInputs', 'MSE': 0.03501392900943756, 'MSE_coords': 0.06242857684205688, 'MSE_energy': 0.25365138142582305
+        },
+        {'Model': '-FourierHNN2-Basic_Learn_ForwardInputs', 'MSE': 0.035019401460886, 'MSE_coords': 0.0625279090014402, 'MSE_energy': 0.25383678510295304
+        },
+        {'Model': '-FourierHNN-Basic_DontLearn_DontForwardInputs', 'MSE': 0.035486917942762375, 'MSE_coords': 0.06216597147840934, 'MSE_energy': 0.25393866955700245
+        },
+        {'Model': '-mlp', 'MSE': 0.03501315042376518, 'MSE_coords': 0.06109444687855845, 'MSE_energy': 0.2597173390460428
+        }
+    ]
+}

@@ -1,0 +1,56 @@
+[
+    {'Model': '-mlp', 'MSE': 0.09970570355653763, 'MSE_coords': 1.439274375246417, 'MSE_energy': 9.344277321911306
+    },
+    {'Model': '-hnn', 'MSE': 0.0743652805685997, 'MSE_coords': 0.23536212628898906, 'MSE_energy': 0.12312998885246884
+    },
+    {'Model': '-NaiveFourierHNN', 'MSE': 0.04799195006489754, 'MSE_coords': 0.15969898378627498, 'MSE_energy': 0.09712816221280456
+    },
+    {'Model': '-FourierHNN-Basic_Learn_ForwardInputs', 'MSE': 0.05055439844727516, 'MSE_coords': 0.07925194710677716, 'MSE_energy': 0.09910511734706332
+    },
+    {'Model': '-FourierHNN-Gaussian_10_1__Learn_ForwardInputs', 'MSE': 0.11293453723192215, 'MSE_coords': 0.3872286301630027, 'MSE_energy': 0.27132178653878963
+    },
+    {'Model': '-FourierHNN-Positional_Learn_ForwardInputs', 'MSE': 0.06806104630231857, 'MSE_coords': 0.3637229453441022, 'MSE_energy': 0.10878785571620489
+    },
+    {'Model': '-FourierHNN-Basic_DontLearn_ForwardInputs', 'MSE': 0.05462047830224037, 'MSE_coords': 0.46810784340597816, 'MSE_energy': 0.13000903505234246
+    },
+    {'Model': '-FourierHNN-Gaussian_10_1__DontLearn_ForwardInputs', 'MSE': 0.11427418887615204, 'MSE_coords': 0.5606220563328386, 'MSE_energy': 0.11413574942289856
+    },
+    {'Model': '-FourierHNN-Positional_DontLearn_ForwardInputs', 'MSE': 0.07238107919692993, 'MSE_coords': 0.3958967978842899, 'MSE_energy': 0.11021394050168272
+    },
+    {'Model': '-FourierHNN-Basic_Learn_DontForwardInputs', 'MSE': 0.04779072850942612, 'MSE_coords': 0.27764540072997224, 'MSE_energy': 0.09660444600682568
+    },
+    {'Model': '-FourierHNN-Gaussian_10_1__Learn_DontForwardInputs', 'MSE': 0.08907288312911987, 'MSE_coords': 0.5587639836866711, 'MSE_energy': 4.417956858314348
+    },
+    {'Model': '-FourierHNN-Positional_Learn_DontForwardInputs', 'MSE': 0.0614892803132534, 'MSE_coords': 0.3881147564097301, 'MSE_energy': 0.10189608062586338
+    },
+    {'Model': '-FourierHNN-Basic_DontLearn_DontForwardInputs', 'MSE': 0.716060996055603, 'MSE_coords': 40.853883827012474, 'MSE_energy': 15719.823194753382
+    },
+    {'Model': '-FourierHNN-Gaussian_10_1__DontLearn_DontForwardInputs', 'MSE': 0.5355750322341919, 'MSE_coords': 3.913718567804171, 'MSE_energy': 1070.17321017432
+    },
+    {'Model': '-FourierHNN-Positional_DontLearn_DontForwardInputs', 'MSE': 0.9998396635055542, 'MSE_coords': 33.82854666142896, 'MSE_energy': 14962.377075581704
+    },
+    {'Model': '-FourierHNN2-Basic_Learn_ForwardInputs', 'MSE': 0.04673292487859726, 'MSE_coords': 0.3921148757827416, 'MSE_energy': 0.10897779002860301
+    },
+    {'Model': '-FourierHNN2-Gaussian_10_1__Learn_ForwardInputs', 'MSE': 0.05276542156934738, 'MSE_coords': 0.23512838974586212, 'MSE_energy': 0.10179310280781896
+    },
+    {'Model': '-FourierHNN2-Positional_Learn_ForwardInputs', 'MSE': 0.051002584397792816, 'MSE_coords': 0.509523769221827, 'MSE_energy': 0.11993152610515971
+    },
+    {'Model': '-FourierHNN2-Basic_DontLearn_ForwardInputs', 'MSE': 0.05032029002904892, 'MSE_coords': 0.41866054310786777, 'MSE_energy': 0.1178389371108889
+    },
+    {'Model': '-FourierHNN2-Gaussian_10_1__DontLearn_ForwardInputs', 'MSE': 0.06362970918416977, 'MSE_coords': 0.42822608122199013, 'MSE_energy': 0.125450525750793
+    },
+    {'Model': '-FourierHNN2-Positional_DontLearn_ForwardInputs', 'MSE': 0.05312835052609444, 'MSE_coords': 0.6333764089823715, 'MSE_energy': 0.14894612164043158
+    },
+    {'Model': '-FourierHNN2-Basic_Learn_DontForwardInputs', 'MSE': 0.044985733926296234, 'MSE_coords': 0.20739164997613546, 'MSE_energy': 0.09628262651617431
+    },
+    {'Model': '-FourierHNN2-Gaussian_10_1__Learn_DontForwardInputs', 'MSE': 0.05499446019530296, 'MSE_coords': 0.4464069958409882, 'MSE_energy': 0.11267533114079402
+    },
+    {'Model': '-FourierHNN2-Positional_Learn_DontForwardInputs', 'MSE': 0.05144862085580826, 'MSE_coords': 0.4008634343396727, 'MSE_energy': 0.09859417560336468
+    },
+    {'Model': '-FourierHNN2-Basic_DontLearn_DontForwardInputs', 'MSE': 0.048334136605262756, 'MSE_coords': 0.48033349110475865, 'MSE_energy': 0.09638174187153077
+    },
+    {'Model': '-FourierHNN2-Gaussian_10_1__DontLearn_DontForwardInputs', 'MSE': 0.052701495587825775, 'MSE_coords': 0.4319866774533869, 'MSE_energy': 0.11510061439837015
+    },
+    {'Model': '-FourierHNN2-Positional_DontLearn_DontForwardInputs', 'MSE': 0.05205675587058067, 'MSE_coords': 0.21286883446427307, 'MSE_energy': 0.09774888718964873
+    }
+]

@@ -1,0 +1,167 @@
+{'MSE': [
+        {'Model': '-FourierHNN2-Basic_DontLearn_DontForwardInputs', 'MSE': 4.602230072021484, 'MSE_coords': 34.701283512679545, 'MSE_energy': 25.145135289749454
+        },
+        {'Model': '-NaiveFourierHNN', 'MSE': 4.674527168273926, 'MSE_coords': 39.58298698394463, 'MSE_energy': 23.84016643109721
+        },
+        {'Model': '-FourierHNN2-Positional_DontLearn_DontForwardInputs', 'MSE': 5.081376075744629, 'MSE_coords': 35.2592677800242, 'MSE_energy': 34.58210429731992
+        },
+        {'Model': '-FourierHNN2-Basic_Learn_DontForwardInputs', 'MSE': 5.902117729187012, 'MSE_coords': 31.19899951710268, 'MSE_energy': 173.92106465441861
+        },
+        {'Model': '-FourierHNN2-Positional_Learn_DontForwardInputs', 'MSE': 6.004220485687256, 'MSE_coords': 37.955219088248676, 'MSE_energy': 129.98694457578608
+        },
+        {'Model': '-FourierHNN2-Basic_Learn_ForwardInputs', 'MSE': 6.314720630645752, 'MSE_coords': 28.881662450116764, 'MSE_energy': 263.9103422299703
+        },
+        {'Model': '-FourierHNN2-Basic_DontLearn_ForwardInputs', 'MSE': 6.35365629196167, 'MSE_coords': 33.19200278473465, 'MSE_energy': 194.81047468155302
+        },
+        {'Model': '-FourierHNN2-Positional_DontLearn_ForwardInputs', 'MSE': 6.805957794189453, 'MSE_coords': 32.44277880725189, 'MSE_energy': 48.89290008226353
+        },
+        {'Model': '-FourierHNN-Basic_Learn_DontForwardInputs', 'MSE': 6.818322658538818, 'MSE_coords': 58.14006948039604, 'MSE_energy': 8175.756224013778
+        },
+        {'Model': '-FourierHNN-Basic_Learn_ForwardInputs', 'MSE': 6.898089408874512, 'MSE_coords': 36.47337355844014, 'MSE_energy': 1004.9979566594841
+        },
+        {'Model': '-FourierHNN-Basic_DontLearn_ForwardInputs', 'MSE': 6.9047393798828125, 'MSE_coords': 36.14553187353367, 'MSE_energy': 148.635978518375
+        },
+        {'Model': '-FourierHNN2-Positional_Learn_ForwardInputs', 'MSE': 6.995385646820068, 'MSE_coords': 32.69591748876602, 'MSE_energy': 70.84507080046735
+        },
+        {'Model': '-FourierHNN2-Gaussian_10_1__DontLearn_DontForwardInputs', 'MSE': 7.814942359924316, 'MSE_coords': 38.2155671805414, 'MSE_energy': 9808.687667912667
+        },
+        {'Model': '-FourierHNN2-Gaussian_10_1__Learn_ForwardInputs', 'MSE': 7.913925647735596, 'MSE_coords': 31.773664157763626, 'MSE_energy': 37.066455779287836
+        },
+        {'Model': '-FourierHNN-Positional_DontLearn_ForwardInputs', 'MSE': 8.053925514221191, 'MSE_coords': 38.997341436630606, 'MSE_energy': 415.5352556108035
+        },
+        {'Model': '-FourierHNN-Positional_Learn_ForwardInputs', 'MSE': 8.19930362701416, 'MSE_coords': 38.227567316327914, 'MSE_energy': 626.2339333812229
+        },
+        {'Model': '-FourierHNN2-Gaussian_10_1__DontLearn_ForwardInputs', 'MSE': 8.91355037689209, 'MSE_coords': 33.26467697960116, 'MSE_energy': 171.38857948288378
+        },
+        {'Model': '-FourierHNN2-Gaussian_10_1__Learn_DontForwardInputs', 'MSE': 8.919464111328125, 'MSE_coords': 31.182991973256605, 'MSE_energy': 60.18960638008296
+        },
+        {'Model': '-hnn', 'MSE': 9.478601455688477, 'MSE_coords': 31.52108921204311, 'MSE_energy': 32.88045270887956
+        },
+        {'Model': '-FourierHNN-Positional_Learn_DontForwardInputs', 'MSE': 9.63428020477295, 'MSE_coords': 52.52979435991262, 'MSE_energy': 5091.353037639916
+        },
+        {'Model': '-FourierHNN-Gaussian_10_1__DontLearn_ForwardInputs', 'MSE': 11.245827674865723, 'MSE_coords': 37.6382537219096, 'MSE_energy': 343.70529617998125
+        },
+        {'Model': '-FourierHNN-Gaussian_10_1__Learn_ForwardInputs', 'MSE': 11.940247535705566, 'MSE_coords': 38.03905626576412, 'MSE_energy': 330.36819775080113
+        },
+        {'Model': '-FourierHNN-Gaussian_10_1__Learn_DontForwardInputs', 'MSE': 12.375473022460938, 'MSE_coords': 49.838487379875254, 'MSE_energy': 2592.7382969816076
+        },
+        {'Model': '-mlp', 'MSE': 12.663501739501953, 'MSE_coords': 38.577311637048574, 'MSE_energy': 241.8854037277705
+        },
+        {'Model': '-FourierHNN-Basic_DontLearn_DontForwardInputs', 'MSE': 12.736339569091797, 'MSE_coords': 161.98942880368492, 'MSE_energy': 100388.78331787582
+        },
+        {'Model': '-FourierHNN-Positional_DontLearn_DontForwardInputs', 'MSE': 13.586968421936035, 'MSE_coords': 127.43281229567901, 'MSE_energy': 77547.1054922346
+        },
+        {'Model': '-FourierHNN-Gaussian_10_1__DontLearn_DontForwardInputs', 'MSE': 20.665390014648438, 'MSE_coords': 47.78583398592396, 'MSE_energy': 2394.1909451682395
+        }
+    ], 'MSE_coords': [
+        {'Model': '-FourierHNN2-Basic_Learn_ForwardInputs', 'MSE': 6.314720630645752, 'MSE_coords': 28.881662450116764, 'MSE_energy': 263.9103422299703
+        },
+        {'Model': '-FourierHNN2-Gaussian_10_1__Learn_DontForwardInputs', 'MSE': 8.919464111328125, 'MSE_coords': 31.182991973256605, 'MSE_energy': 60.18960638008296
+        },
+        {'Model': '-FourierHNN2-Basic_Learn_DontForwardInputs', 'MSE': 5.902117729187012, 'MSE_coords': 31.19899951710268, 'MSE_energy': 173.92106465441861
+        },
+        {'Model': '-hnn', 'MSE': 9.478601455688477, 'MSE_coords': 31.52108921204311, 'MSE_energy': 32.88045270887956
+        },
+        {'Model': '-FourierHNN2-Gaussian_10_1__Learn_ForwardInputs', 'MSE': 7.913925647735596, 'MSE_coords': 31.773664157763626, 'MSE_energy': 37.066455779287836
+        },
+        {'Model': '-FourierHNN2-Positional_DontLearn_ForwardInputs', 'MSE': 6.805957794189453, 'MSE_coords': 32.44277880725189, 'MSE_energy': 48.89290008226353
+        },
+        {'Model': '-FourierHNN2-Positional_Learn_ForwardInputs', 'MSE': 6.995385646820068, 'MSE_coords': 32.69591748876602, 'MSE_energy': 70.84507080046735
+        },
+        {'Model': '-FourierHNN2-Basic_DontLearn_ForwardInputs', 'MSE': 6.35365629196167, 'MSE_coords': 33.19200278473465, 'MSE_energy': 194.81047468155302
+        },
+        {'Model': '-FourierHNN2-Gaussian_10_1__DontLearn_ForwardInputs', 'MSE': 8.91355037689209, 'MSE_coords': 33.26467697960116, 'MSE_energy': 171.38857948288378
+        },
+        {'Model': '-FourierHNN2-Basic_DontLearn_DontForwardInputs', 'MSE': 4.602230072021484, 'MSE_coords': 34.701283512679545, 'MSE_energy': 25.145135289749454
+        },
+        {'Model': '-FourierHNN2-Positional_DontLearn_DontForwardInputs', 'MSE': 5.081376075744629, 'MSE_coords': 35.2592677800242, 'MSE_energy': 34.58210429731992
+        },
+        {'Model': '-FourierHNN-Basic_DontLearn_ForwardInputs', 'MSE': 6.9047393798828125, 'MSE_coords': 36.14553187353367, 'MSE_energy': 148.635978518375
+        },
+        {'Model': '-FourierHNN-Basic_Learn_ForwardInputs', 'MSE': 6.898089408874512, 'MSE_coords': 36.47337355844014, 'MSE_energy': 1004.9979566594841
+        },
+        {'Model': '-FourierHNN-Gaussian_10_1__DontLearn_ForwardInputs', 'MSE': 11.245827674865723, 'MSE_coords': 37.6382537219096, 'MSE_energy': 343.70529617998125
+        },
+        {'Model': '-FourierHNN2-Positional_Learn_DontForwardInputs', 'MSE': 6.004220485687256, 'MSE_coords': 37.955219088248676, 'MSE_energy': 129.98694457578608
+        },
+        {'Model': '-FourierHNN-Gaussian_10_1__Learn_ForwardInputs', 'MSE': 11.940247535705566, 'MSE_coords': 38.03905626576412, 'MSE_energy': 330.36819775080113
+        },
+        {'Model': '-FourierHNN2-Gaussian_10_1__DontLearn_DontForwardInputs', 'MSE': 7.814942359924316, 'MSE_coords': 38.2155671805414, 'MSE_energy': 9808.687667912667
+        },
+        {'Model': '-FourierHNN-Positional_Learn_ForwardInputs', 'MSE': 8.19930362701416, 'MSE_coords': 38.227567316327914, 'MSE_energy': 626.2339333812229
+        },
+        {'Model': '-mlp', 'MSE': 12.663501739501953, 'MSE_coords': 38.577311637048574, 'MSE_energy': 241.8854037277705
+        },
+        {'Model': '-FourierHNN-Positional_DontLearn_ForwardInputs', 'MSE': 8.053925514221191, 'MSE_coords': 38.997341436630606, 'MSE_energy': 415.5352556108035
+        },
+        {'Model': '-NaiveFourierHNN', 'MSE': 4.674527168273926, 'MSE_coords': 39.58298698394463, 'MSE_energy': 23.84016643109721
+        },
+        {'Model': '-FourierHNN-Gaussian_10_1__DontLearn_DontForwardInputs', 'MSE': 20.665390014648438, 'MSE_coords': 47.78583398592396, 'MSE_energy': 2394.1909451682395
+        },
+        {'Model': '-FourierHNN-Gaussian_10_1__Learn_DontForwardInputs', 'MSE': 12.375473022460938, 'MSE_coords': 49.838487379875254, 'MSE_energy': 2592.7382969816076
+        },
+        {'Model': '-FourierHNN-Positional_Learn_DontForwardInputs', 'MSE': 9.63428020477295, 'MSE_coords': 52.52979435991262, 'MSE_energy': 5091.353037639916
+        },
+        {'Model': '-FourierHNN-Basic_Learn_DontForwardInputs', 'MSE': 6.818322658538818, 'MSE_coords': 58.14006948039604, 'MSE_energy': 8175.756224013778
+        },
+        {'Model': '-FourierHNN-Positional_DontLearn_DontForwardInputs', 'MSE': 13.586968421936035, 'MSE_coords': 127.43281229567901, 'MSE_energy': 77547.1054922346
+        },
+        {'Model': '-FourierHNN-Basic_DontLearn_DontForwardInputs', 'MSE': 12.736339569091797, 'MSE_coords': 161.98942880368492, 'MSE_energy': 100388.78331787582
+        }
+    ], 'MSE_Energy': [
+        {'Model': '-NaiveFourierHNN', 'MSE': 4.674527168273926, 'MSE_coords': 39.58298698394463, 'MSE_energy': 23.84016643109721
+        },
+        {'Model': '-FourierHNN2-Basic_DontLearn_DontForwardInputs', 'MSE': 4.602230072021484, 'MSE_coords': 34.701283512679545, 'MSE_energy': 25.145135289749454
+        },
+        {'Model': '-hnn', 'MSE': 9.478601455688477, 'MSE_coords': 31.52108921204311, 'MSE_energy': 32.88045270887956
+        },
+        {'Model': '-FourierHNN2-Positional_DontLearn_DontForwardInputs', 'MSE': 5.081376075744629, 'MSE_coords': 35.2592677800242, 'MSE_energy': 34.58210429731992
+        },
+        {'Model': '-FourierHNN2-Gaussian_10_1__Learn_ForwardInputs', 'MSE': 7.913925647735596, 'MSE_coords': 31.773664157763626, 'MSE_energy': 37.066455779287836
+        },
+        {'Model': '-FourierHNN2-Positional_DontLearn_ForwardInputs', 'MSE': 6.805957794189453, 'MSE_coords': 32.44277880725189, 'MSE_energy': 48.89290008226353
+        },
+        {'Model': '-FourierHNN2-Gaussian_10_1__Learn_DontForwardInputs', 'MSE': 8.919464111328125, 'MSE_coords': 31.182991973256605, 'MSE_energy': 60.18960638008296
+        },
+        {'Model': '-FourierHNN2-Positional_Learn_ForwardInputs', 'MSE': 6.995385646820068, 'MSE_coords': 32.69591748876602, 'MSE_energy': 70.84507080046735
+        },
+        {'Model': '-FourierHNN2-Positional_Learn_DontForwardInputs', 'MSE': 6.004220485687256, 'MSE_coords': 37.955219088248676, 'MSE_energy': 129.98694457578608
+        },
+        {'Model': '-FourierHNN-Basic_DontLearn_ForwardInputs', 'MSE': 6.9047393798828125, 'MSE_coords': 36.14553187353367, 'MSE_energy': 148.635978518375
+        },
+        {'Model': '-FourierHNN2-Gaussian_10_1__DontLearn_ForwardInputs', 'MSE': 8.91355037689209, 'MSE_coords': 33.26467697960116, 'MSE_energy': 171.38857948288378
+        },
+        {'Model': '-FourierHNN2-Basic_Learn_DontForwardInputs', 'MSE': 5.902117729187012, 'MSE_coords': 31.19899951710268, 'MSE_energy': 173.92106465441861
+        },
+        {'Model': '-FourierHNN2-Basic_DontLearn_ForwardInputs', 'MSE': 6.35365629196167, 'MSE_coords': 33.19200278473465, 'MSE_energy': 194.81047468155302
+        },
+        {'Model': '-mlp', 'MSE': 12.663501739501953, 'MSE_coords': 38.577311637048574, 'MSE_energy': 241.8854037277705
+        },
+        {'Model': '-FourierHNN2-Basic_Learn_ForwardInputs', 'MSE': 6.314720630645752, 'MSE_coords': 28.881662450116764, 'MSE_energy': 263.9103422299703
+        },
+        {'Model': '-FourierHNN-Gaussian_10_1__Learn_ForwardInputs', 'MSE': 11.940247535705566, 'MSE_coords': 38.03905626576412, 'MSE_energy': 330.36819775080113
+        },
+        {'Model': '-FourierHNN-Gaussian_10_1__DontLearn_ForwardInputs', 'MSE': 11.245827674865723, 'MSE_coords': 37.6382537219096, 'MSE_energy': 343.70529617998125
+        },
+        {'Model': '-FourierHNN-Positional_DontLearn_ForwardInputs', 'MSE': 8.053925514221191, 'MSE_coords': 38.997341436630606, 'MSE_energy': 415.5352556108035
+        },
+        {'Model': '-FourierHNN-Positional_Learn_ForwardInputs', 'MSE': 8.19930362701416, 'MSE_coords': 38.227567316327914, 'MSE_energy': 626.2339333812229
+        },
+        {'Model': '-FourierHNN-Basic_Learn_ForwardInputs', 'MSE': 6.898089408874512, 'MSE_coords': 36.47337355844014, 'MSE_energy': 1004.9979566594841
+        },
+        {'Model': '-FourierHNN-Gaussian_10_1__DontLearn_DontForwardInputs', 'MSE': 20.665390014648438, 'MSE_coords': 47.78583398592396, 'MSE_energy': 2394.1909451682395
+        },
+        {'Model': '-FourierHNN-Gaussian_10_1__Learn_DontForwardInputs', 'MSE': 12.375473022460938, 'MSE_coords': 49.838487379875254, 'MSE_energy': 2592.7382969816076
+        },
+        {'Model': '-FourierHNN-Positional_Learn_DontForwardInputs', 'MSE': 9.63428020477295, 'MSE_coords': 52.52979435991262, 'MSE_energy': 5091.353037639916
+        },
+        {'Model': '-FourierHNN-Basic_Learn_DontForwardInputs', 'MSE': 6.818322658538818, 'MSE_coords': 58.14006948039604, 'MSE_energy': 8175.756224013778
+        },
+        {'Model': '-FourierHNN2-Gaussian_10_1__DontLearn_DontForwardInputs', 'MSE': 7.814942359924316, 'MSE_coords': 38.2155671805414, 'MSE_energy': 9808.687667912667
+        },
+        {'Model': '-FourierHNN-Positional_DontLearn_DontForwardInputs', 'MSE': 13.586968421936035, 'MSE_coords': 127.43281229567901, 'MSE_energy': 77547.1054922346
+        },
+        {'Model': '-FourierHNN-Basic_DontLearn_DontForwardInputs', 'MSE': 12.736339569091797, 'MSE_coords': 161.98942880368492, 'MSE_energy': 100388.78331787582
+        }
+    ]
+}
